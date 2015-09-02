@@ -10,7 +10,6 @@ date_default_timezone_set('Europe/London');
 ini_set('max_execution_time', 300);
 
 ?>
-
 <html>
 	<head>
 		<title>PHP MultiDig</title>
