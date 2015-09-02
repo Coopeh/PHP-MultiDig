@@ -18,12 +18,12 @@ ini_set('max_execution_time', 300);
 		<link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
 		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
-		<script src="assets/js/script.js" type="text/javascript"></script>
+		<script src="assets/js/script.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="github-fork-ribbon-wrapper right">
         <div class="github-fork-ribbon">
-            <a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on GitHub</a>
+            <a href="https://github.com/Coopeh/PHP-MultiDig/">Fork me on GitHub</a>
         </div>
     </div>
 		<div class="container">
