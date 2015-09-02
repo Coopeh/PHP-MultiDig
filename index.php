@@ -17,7 +17,7 @@ ini_set('max_execution_time', 300);
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
 		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
+		<script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
 		<script src="assets/js/script.min.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -91,7 +91,7 @@ ini_set('max_execution_time', 300);
         <div class="content" id="content"><ul id="content-list"></ul></div>
 			</div>
       <button class="copy-button" id="copy-button">Copy To Clipboard</button>
-      <button class="sort-button" id="sort-button">Sort By Name</button>
+			<button class="sort-button" id="sort-button">Sort By Name</button>
 			<div class="footer">
 				<a href="https://ed.gs" target="_blank">Ed Cooper <?php echo date("Y"); ?></a>
 			</div>
