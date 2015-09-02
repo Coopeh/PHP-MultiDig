@@ -13,7 +13,7 @@ ini_set('max_execution_time', 300);
 <html>
 	<head>
 		<title>PHP MultiDig</title>
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 		<link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
 		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
