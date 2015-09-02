@@ -22,10 +22,10 @@ ini_set('max_execution_time', 300);
 	</head>
 	<body>
 		<div class="github-fork-ribbon-wrapper right">
-        <div class="github-fork-ribbon">
-            <a href="https://github.com/Coopeh/PHP-MultiDig/">Fork me on GitHub</a>
-        </div>
-    </div>
+				<div class="github-fork-ribbon">
+						<a href="https://github.com/Coopeh/PHP-MultiDig/">Fork me on GitHub</a>
+				</div>
+		</div>
 		<div class="container">
 			<div class="header">
 				PHP MultiDig
@@ -83,14 +83,14 @@ ini_set('max_execution_time', 300);
 					</div>
 					<div class="submit">
 						<button class="submit" type="submit" tabindex="2">Submit</button>
-            <button class="clear" type="button" tabindex="3">Clear</button>
+						<button class="clear" type="button" tabindex="3">Clear</button>
 					</div>
 				</form>
 			</div>
 			<div class="results">
-        <div class="content" id="content"><ul id="content-list"></ul></div>
+				<div class="content" id="content"><ul id="content-list"></ul></div>
 			</div>
-      <button class="copy-button" id="copy-button">Copy To Clipboard</button>
+			<button class="copy-button" id="copy-button">Copy To Clipboard</button>
 			<button class="sort-button" id="sort-button">Sort By Name</button>
 			<div class="footer">
 				<a href="https://ed.gs" target="_blank">Ed Cooper <?php echo date("Y"); ?></a>
