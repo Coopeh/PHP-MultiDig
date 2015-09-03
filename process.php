@@ -26,13 +26,23 @@ function get_dns_records($type, $ips){
     $record_type = DNS_TXT;
   } elseif($_POST['radio'] === "radio9") {
     $record_type = DNS_ALL;
+  } elseif($_POST['radio'] === "radio10") {
+    $record_type = "REVERSE";
   } else {
     $record_type = DNS_A;
   }
 
   foreach($urls as $data) {
 
-    $record = dns_get_record($data, $record_type);
+    if($record_type !== "REVERSE") {
+      $record = dns_get_record($data, $record_type);
+    } else {
+      if(preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\z/', $data)){
+        $record = gethostbyaddr($data);
+      } else {
+        $record = "Please enter an IP, not a hostname";
+      }
+    }
 
     if( empty( $record ) ) {
       // If the DNS entry doesn't exist then tell us
@@ -76,6 +86,7 @@ function get_dns_records($type, $ips){
         }
         echo "</pre>\r\n";
       }
+      // Record type is set as PTR
       elseif($record_type === DNS_PTR) {
         echo "<pre>\r\n";
         foreach($record as $ptr){
@@ -84,6 +95,10 @@ function get_dns_records($type, $ips){
           echo "</li>\r\n";
         }
         echo "</pre>\r\n";
+      }
+      // Record type is set as ReverseDNS
+      elseif($record_type === "REVERSE") {
+        echo "<li>".$data." - ".$record."</li>\r\n";
       }
     }
   }

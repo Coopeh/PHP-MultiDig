@@ -8,6 +8,7 @@
 
 date_default_timezone_set('Europe/London');
 ini_set('max_execution_time', 300);
+ini_set("display_errors", 0);
 
 ?>
 <html>
@@ -91,6 +92,11 @@ ini_set('max_execution_time', 300);
 						<div>
 							<input type="radio" name="radio" id="radio9" value="radio9" class="radio"/>
 							<label for="radio9">ALL Records</label>
+						</div>
+
+						<div>
+							<input type="radio" name="radio" id="radio10" value="radio10" class="radio"/>
+							<label for="radio10">Reverse DNS</label>
 						</div>
 					</div>
 					<div class="submit">
