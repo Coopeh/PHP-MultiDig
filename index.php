@@ -18,6 +18,19 @@ ini_set('max_execution_time', 300);
 		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
 		<script src="assets/js/script.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		var _paq = _paq || [];
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="//stats.ed.gs/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', 151]);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		})();
+		</script>
+		<noscript><p><img src="//stats.ed.gs/piwik.php?idsite=151" style="border:0;" alt="" /></p></noscript>
 	</head>
 	<body>
 		<div class="github-fork-ribbon-wrapper right">
