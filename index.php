@@ -112,13 +112,7 @@ ini_set("display_errors", 0);
 			</div>
 			<div class="results">
 				<div class="content" id="content">
-					<table id="content-list">
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
-					</table>
+					<table id="content-list"></table>
 				</div>
 			</div>
 			<button class="copy-button" id="copy-button">Copy To Clipboard</button>

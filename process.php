@@ -32,12 +32,6 @@ function get_dns_records( $type, $ips ){
     $record_type = DNS_A;
   }
 
-  echo "<tr>";
-  echo "<th></th>";
-  echo "<th></th>";
-  echo "<th></th>";
-  echo "</tr>";
-
   foreach( $urls as $data ) {
 
     if( $record_type !== "REVERSE" ) {
