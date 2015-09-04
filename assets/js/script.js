@@ -3,20 +3,20 @@ $(document).ready(function() {
 	$('form').submit(function(event) {
 
 		$('div.results').css({"opacity": 0, "pointer-events": "auto", "height": 0, "margin-top": 0});
-		$('ul#content-list').empty;
+		$('table#content-list').empty;
 		$('button.submit').animate().html('Loading...').attr("disabled", true).css({"background-color": "rgba(36, 60, 187, 0.48)"});
 		var textarea = $.trim( $('textarea#domains').val() );
 
 		if(!textarea) {
 
 			$('div.results').css({"opacity": 1, "pointer-events": "auto", "height": "auto", "margin-top": "30px"});
-			$('ul#content-list').html("No domains listed, please add some domains in a list...");
+			$('table#content-list').html("No domains listed, please add some domains in a list...");
 			$('button.submit').animate().html('Submit').attr("disabled", false).css({"background-color": "transparent)"});
 			return false;
 
 		} else {
 
-			$('ul#content-list').empty();
+			$('table#content-list').empty();
 			$('button.submit').animate().html('Loading...').attr("disabled", true).css({"background-color": "rgba(36, 60, 187, 0.48)"});
 			var domains = $('textarea#domains').val().split('\n');
 			var radio = $('input[name=radio]:checked', 'form#dig').val();
@@ -31,7 +31,7 @@ $(document).ready(function() {
 					},
 					success: function(data) {
 						$('div.results').css({"opacity": 1, "pointer-events": "auto", "height": "auto", "margin-top": "30px"});
-						$('ul#content-list').append(data);
+						$('table#content-list').append(data);
 					},
 				}).fail(function(data) {
 					console.log(data + "fail");
@@ -42,10 +42,9 @@ $(document).ready(function() {
 			});
 
 			setTimeout(function() {
-    			$('button.submit').animate().html('Submit').attr("disabled", false).css({"background-color": "transparent"});;
+					$('button.submit').animate().html('Submit').attr("disabled", false).css({"background-color": "transparent"});;
 			}, 2500);
-			$('button.copy-button').show();
-			$('button.sort-button').show();
+			$('button.copy-button, a.export-button, button.sort-button, button.hide-button').show().css({"display": "block"});
 			return false;
 		}
 	});
@@ -53,54 +52,123 @@ $(document).ready(function() {
 		$("button.clear").animate().html('Domains cleared').attr("disabled", false).css({"background-color": "rgba(36, 60, 187, 0.48)"});
 		$('textarea#domains').val("");
 		$('div.results').css({"opacity": 0, "pointer-events": "auto", "height": 0, "margin-top": 0});
-		$('ul#content-list').empty();
-		$('button.copy-button').hide();
-		$('button.sort-button').hide();
+		$('table#content-list').empty();
+		$('button.copy-button, a.export-button, button.sort-button, button.hide-button').hide();
 		setTimeout(function() {
 			$('button.clear').animate().html('Clear').attr("disabled", false).css({"background-color": "transparent"});;
 		}, 1500);
-	  return false;
+		return false;
+	});
+
+	$('button.hide-button').click(function(){
+		$('tr > td.record:contains("No record available")').parent().remove();
+		var desc = false;
+		document.getElementById("sort-button").onclick = function() {
+			sortUnorderedList("content-list", desc);
+			desc = !desc;
+			return false;
+		}
+		window.location.hash = '#hide-button';
 	});
 
 	ZeroClipboard.config( { swfPath: "./assets/swf/ZeroClipboard.swf" } );
 	var client = new ZeroClipboard( document.getElementById("copy-button") );
 
 	client.on( "copy", function (event) {
-	  var clipboard = event.clipboardData;
-	  var c = document.getElementById("content");
-	  var c = c.textContent || c.innerText;
-	  clipboard.setData( "text/plain", c);
-	  $('button.copy-button').animate().html('Copied To Clipboard...').css({"background-color": "rgba(36, 60, 187, 0.48)"});
-	  setTimeout(function() {
-		  $('button.copy-button').animate().html('Copy To Clipboard').css({"background-color": "transparent"});
-	  }, 2500);
+		var clipboard = event.clipboardData;
+		var c = document.getElementById("content");
+		var c = c.textContent || c.innerText;
+		var c = c.replace(/^\s*[\r\n]/gm, "");
+		clipboard.setData( "text/plain", c);
+		$('button.copy-button').animate().html('Copied To Clipboard...').css({"background-color": "rgba(36, 60, 187, 0.48)"});
+		setTimeout(function() {
+			$('button.copy-button').animate().html('Copy To Clipboard').css({"background-color": "transparent"});
+		}, 2500);
+	});
+
+	function exportTableToCSV($table, filename) {
+		var $rows = $table.find('tr:has(td)')
+				,tmpColDelim = String.fromCharCode(11)
+				,tmpRowDelim = String.fromCharCode(0)
+				,colDelim = '","'
+				,rowDelim = '"\r\n"';
+
+		var csv = '"';
+		csv += formatRows($rows.map(grabRow)) + '"';
+
+		var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+		if (window.navigator.msSaveOrOpenBlob) {
+				var blob = new Blob([decodeURIComponent(encodeURI(csv))], {
+						type: "text/csv;charset=utf-8;"
+				});
+				navigator.msSaveBlob(blob, filename);
+		} else {
+				$(this)
+						.attr({
+								'download': filename
+								,'href': csvData
+				});
+		}
+
+		function formatRows(rows){
+				return rows.get().join(tmpRowDelim)
+						.split(tmpRowDelim).join(rowDelim)
+						.split(tmpColDelim).join(colDelim);
+		}
+
+		function grabRow(i,row){
+				var $row = $(row);
+				var $cols = $row.find('td');
+
+				return $cols.map(grabCol)
+				.get().join(tmpColDelim);
+		}
+
+		function grabCol(j,col){
+				var $col = $(col),
+						$text = $col.text();
+				return $text.replace('"', '""');
+		}
+	}
+
+	$("a.export-button").click(function (event) {
+			var outputFile = window.prompt("Filename?") || 'export';
+			outputFile = outputFile.replace('.csv','') + '.csv'
+
+			exportTableToCSV.apply(this, [$('table#content-list'), outputFile]);
+
+			$('a.export-button').animate().html('Exporting...').css({"background-color": "rgba(36, 60, 187, 0.48)"});
+			setTimeout(function() {
+				$('a.export-button').animate().html('Export To CSV').css({"background-color": "transparent"});
+			}, 2500);
 	});
 });
 
 function sortUnorderedList(ul, sortDescending) {
-  if(typeof ul == "string")
-    ul = document.getElementById("content-list");
+	if(typeof ul == "string")
+		ul = document.getElementById("content-list");
 
-  var lis = ul.getElementsByTagName("LI");
-  var vals = [];
+	var lis = ul.getElementsByTagName("TR");
+	var vals = [];
 
-  for(var i = 0, l = lis.length; i < l; i++)
-    vals.push(lis[i].innerHTML);
+	for(var i = 0, l = lis.length; i < l; i++)
+		vals.push(lis[i].innerHTML);
 
-  vals.sort();
+	vals.sort();
 
-  if(sortDescending)
-    vals.reverse();
+	if(sortDescending)
+		vals.reverse();
 
-  for(var i = 0, l = lis.length; i < l; i++)
-    lis[i].innerHTML = vals[i];
+	for(var i = 0, l = lis.length; i < l; i++)
+		lis[i].innerHTML = vals[i];
 }
 
 window.onload = function() {
-  var desc = false;
-  document.getElementById("sort-button").onclick = function() {
-    sortUnorderedList("content-list", desc);
-    desc = !desc;
-    return false;
-  }
+	var desc = false;
+	document.getElementById("sort-button").onclick = function() {
+		sortUnorderedList("content-list", desc);
+		desc = !desc;
+		return false;
+	}
 }

@@ -14,11 +14,13 @@ ini_set("display_errors", 0);
 <html>
 	<head>
 		<title>PHP MultiDig</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-		<link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css">
 		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
-		<script src="assets/js/script.min.js" type="text/javascript"></script>
+		<script src="assets/js/script.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		var _paq = _paq || [];
 		_paq.push(['trackPageView']);
@@ -46,58 +48,61 @@ ini_set("display_errors", 0);
 			<div class="form">
 				<form name="dig" id="dig" action="process.php" method="post">
 					<div class="textarea">
-						<textarea rows="10" name="domains" id="domains" placeholder="List of domains" tabindex="1" autofocus/>	</textarea>
+						<textarea rows="10" name="domains" id="domains" placeholder="List of domains" tabindex="1" autofocus/></textarea>
 					</div>
 					<div class="radio_list">
-						<div>
-							<input type="radio" name="radio" id="radio1" value="radio1" class="radio" checked/>
-							<label for="radio1">A Records</label>
-						</div>
+						<ul>
+							<li>
+								<input type="radio" name="radio" id="radio1" value="radio1" class="radio" checked/>
+								<label for="radio1">A Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio2" value="radio2" class="radio"/>
-							<label for="radio2">AAAA Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio2" value="radio2" class="radio"/>
+								<label for="radio2">AAAA Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio3" value="radio3" class="radio"/>
-							<label for="radio3">CNAME Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio3" value="radio3" class="radio"/>
+								<label for="radio3">CNAME Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio4" value="radio4" class="radio"/>
-							<label for="radio4">MX Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio4" value="radio4" class="radio"/>
+								<label for="radio4">MX Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio5" value="radio5" class="radio"/>
-							<label for="radio5">NS Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio5" value="radio5" class="radio"/>
+								<label for="radio5">NS Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio6" value="radio6" class="radio"/>
-							<label for="radio6">PTR Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio6" value="radio6" class="radio"/>
+								<label for="radio6">PTR Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio7" value="radio7" class="radio"/>
-							<label for="radio7">SRV Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio7" value="radio7" class="radio"/>
+								<label for="radio7">SRV Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio8" value="radio8" class="radio"/>
-							<label for="radio8">TXT Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio8" value="radio8" class="radio"/>
+								<label for="radio8">TXT Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio9" value="radio9" class="radio"/>
-							<label for="radio9">ALL Records</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio9" value="radio9" class="radio"/>
+								<label for="radio9">ALL Records</label>
+							</li>
 
-						<div>
-							<input type="radio" name="radio" id="radio10" value="radio10" class="radio"/>
-							<label for="radio10">Reverse DNS</label>
-						</div>
+							<li>
+								<input type="radio" name="radio" id="radio10" value="radio10" class="radio"/>
+								<label for="radio10">Reverse DNS</label>
+							</li>
+						</ul>
+					</li>
 					</div>
 					<div class="submit">
 						<button class="submit" type="submit" tabindex="2">Submit</button>
@@ -106,10 +111,20 @@ ini_set("display_errors", 0);
 				</form>
 			</div>
 			<div class="results">
-				<div class="content" id="content"><ul id="content-list"></ul></div>
+				<div class="content" id="content">
+					<table id="content-list">
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<button class="copy-button" id="copy-button">Copy To Clipboard</button>
+			<a class="export-button" id="export-button">Export To CSV</a>
 			<button class="sort-button" id="sort-button">Sort By Name</button>
+			<button class="hide-button" id="hide-button">Hide Recordless Domains</button>
 			<div class="footer">
 				<a href="https://ed.gs" target="_blank">Ed Cooper <?php echo date("Y"); ?></a>
 			</div>

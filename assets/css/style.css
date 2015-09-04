@@ -26,7 +26,7 @@ ul li {
 }
 ul {
 	margin: 0;
-	padding: 10px 15px;
+	/*padding: 10px 15px;*/
 }
 div.container {
 	position: relative;
@@ -63,7 +63,6 @@ div.textarea textarea {
 	text-decoration: none;
 	font-weight: bold;
 	background-color: transparent;
-	cursor: pointer;
 	white-space: nowrap;
 	-webkit-appearance: none;
 	-webkit-font-smoothing: antialiased;
@@ -82,12 +81,17 @@ div.radio_list {
 	display: block;
 	margin: 0 auto;
 	width: 30%;
-	min-height: 450px;
 	float: left;
 }
-div.radio_list div {
-	clear: both;
-	margin: 0 0 0 50px;
+div.radio_list ul {
+	height: 500px;
+	display: table;
+	width: 100%;
+	padding: 0;
+}
+div.radio_list ul li {
+	display: table-row;
+	margin-left: 10px;
 }
 label {
 	width: 100%;
@@ -96,13 +100,14 @@ label {
 }
 input.radio:empty {
 	margin-left: -9999px;
+	height: 0;
 }
 input.radio:empty ~ label {
 	position: relative;
-	float: left;
 	line-height: 2.5em;
 	text-indent: 3.25em;
-	margin-bottom: 1em;
+	width: 90%;
+	float: right;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -149,7 +154,9 @@ div.submit {
 button[type="submit"],
 button.clear,
 button.copy-button,
-button.sort-button {
+a.export-button,
+button.sort-button,
+button.hide-button {
 	background-color: transparent;
 	border-radius: 3px;
 	cursor: pointer;
@@ -160,6 +167,7 @@ button.sort-button {
 	border: 1px #eee solid;
 	position: relative;
 	width: 100%;
+	text-align: center;
 	-webkit-appearance: none;
 	outline: none;
 	box-sizing: content-box;
@@ -167,7 +175,9 @@ button.sort-button {
 button[type="submit"]:hover,
 button.clear:hover,
 button.copy-button:hover,
-button.sort-button:hover {
+a.export-button:hover,
+button.sort-button:hover,
+button.hide-button:hover {
 	color: #eee;
 	cursor: pointer;
 	background-color: rgba(255,255,255,0.1);
@@ -178,8 +188,10 @@ button.sort-button:hover {
 }
 button[type="submit"]:active,
 button.clear:active,
-button.copy-button:active
-button.sort-button:active {
+button.copy-button:active,
+a.export-button:active,
+button.sort-button:active,
+button.hide-button:active {
 	color: #fff;
 	background-color: rgba(255,255,255,0.2);
 	position: relative;
@@ -187,11 +199,15 @@ button.sort-button:active {
 }
 button.clear,
 button.copy-button,
-button.sort-button {
+a.export-button,
+button.sort-button,
+button.hide-button {
 	margin-top: 5px;
 }
 button.copy-button,
-button.sort-button {
+a.export-button,
+button.sort-button,
+button.hide-button {
 	display: none;
 }
 div.results {
@@ -206,6 +222,7 @@ div.results {
 	width: 100%;
 	height: 0;
 	margin-top: 0;
+	margin-bottom: 20px;
 	-webkit-transition: all 0.10s ease-in-out;
 	-moz-transition: all 0.10s ease-in-out;
 	-ms-transition: all 0.10s ease-in-out;
@@ -215,11 +232,14 @@ div.results .content {
 	padding: 10px;
 	box-sizing: border-box;
 }
-ul#content-list li:nth-child(odd) {
+table#content-list tr:nth-child(odd) {
 	color: #FFEBEB;
 }
-ul#content-list li:nth-child(even) {
+table#content-list tr:nth-child(even) {
 	color: #C4C5FB;
+}
+table#content-list tr td.record {
+	padding-left: 20px;
 }
 span.norecord {
 	color: #FFC7C7;
