@@ -17,10 +17,10 @@ ini_set("display_errors", 0);
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-		<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
 		<script src="assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="assets/js/ZeroClipboard.min.js" type="text/javascript"></script>
-		<script src="assets/js/script.js" type="text/javascript"></script>
+		<script src="assets/js/script.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		var _paq = _paq || [];
 		_paq.push(['trackPageView']);
