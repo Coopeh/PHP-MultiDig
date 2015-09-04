@@ -46,34 +46,34 @@ function get_dns_records( $type, $ips ){
 
     if( empty( $record ) ) {
       // If the DNS entry doesn't exist then tell us
-        echo "<tr><td>".$data."</td><td> </td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+        echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\"> No record available</span></td></tr>\r\n";
     } else {
       // Record type is set as TXT
       if( $record_type === DNS_TXT ) {
-        echo "<tr><td>".$record[0]["host"]."</td><td> </td><td class=\"record\">".$record[0]["txt"]."</td></tr>\r\n";
+        echo "<tr><td>".$record[0]["host"]."</td><td class=\"record\"> ".$record[0]["txt"]."</td></tr>\r\n";
       }
       // Record type is set as A
       elseif( $record_type === DNS_A ) {
-        echo "<tr><td>".$data."</td><td> </td><td class=\"record\">".$record[0]["ip"]."</td></tr>\r\n";
+        echo "<tr><td>".$data."</td><td class=\"record\"> ".$record[0]["ip"]."</td></tr>\r\n";
       }
       // Record type is set as AAAA
       elseif( $record_type === DNS_AAAA ) {
-        echo "<tr><td>".$data."</td><td> </td><td class=\"record\">".$record[0]["ipv6"]."</td></tr>\r\n";
+        echo "<tr><td>".$data."</td><td class=\"record\"> ".$record[0]["ipv6"]."</td></tr>\r\n";
       }
       // Record type is set as CNAME
       elseif( $record_type === DNS_CNAME ) {
-        echo "<tr><td>".$data."</td><td> </td><td class=\"record\">".$record[0]["target"]."</td></tr>\r\n";
+        echo "<tr><td>".$data."</td><td class=\"record\"> ".$record[0]["target"]."</td></tr>\r\n";
       }
       // Record type is set as MX
       elseif( $record_type === DNS_MX ) {
         foreach( $record as $mx ) {
-          echo "<tr><td>".$mx["host"]."</td><td> </td><td class=\"record\">".$mx["pri"]." - ".$mx["target"]."</td></tr>\r\n";
+          echo "<tr><td>".$mx["host"]."</td><td class=\"record\"> ".$mx["pri"]." - ".$mx["target"]."</td></tr>\r\n";
         }
       }
       // Record type is set as NS
       elseif( $record_type === DNS_NS ) {
         foreach( $record as $ns ) {
-          echo "<tr><td>".$ns["host"]."</td><td> </td><td class=\"record\">".$ns["target"]."</td></tr>\r\n";
+          echo "<tr><td>".$ns["host"]."</td><td class=\"record\"> ".$ns["target"]."</td></tr>\r\n";
         }
       }
       // Record type is set as ALL
@@ -82,7 +82,7 @@ function get_dns_records( $type, $ips ){
         foreach( $record as $all ){
           echo "<tr><td>";
           print_r( $all );
-          echo "</td><td></td></tr>\r\n";
+          echo "</td></tr>\r\n";
         }
         echo "</pre>\r\n";
       }
@@ -92,13 +92,13 @@ function get_dns_records( $type, $ips ){
         foreach( $record as $ptr ){
           echo "<tr><td>";
           print_r( $record );
-          echo "</td><td></td></tr>\r\n";
+          echo "</td></tr>\r\n";
         }
         echo "</pre>\r\n";
       }
       // Record type is set as ReverseDNS
       elseif( $record_type === "REVERSE" ) {
-        echo "<tr><td>".$data."</td><td> </td><td class=\"record\">".$record."</td></tr>\r\n";
+        echo "<tr><td>".$data."</td><td class=\"record\"> ".$record."</td></tr>\r\n";
       }
     }
   }

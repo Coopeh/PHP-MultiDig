@@ -78,7 +78,10 @@ $(document).ready(function() {
 		var clipboard = event.clipboardData;
 		var c = document.getElementById("content");
 		var c = c.textContent || c.innerText;
-		var c = c.replace(/^\s*[\r\n]/gm, "");
+		var c = c.replace(/^\s*[\r\n]/gm, '');
+		var c = c.replace(/\A\s+/, '');
+		var c = c.trim();
+
 		clipboard.setData( "text/plain", c);
 		$('button.copy-button').animate().html('Copied To Clipboard...').css({"background-color": "rgba(36, 60, 187, 0.48)"});
 		setTimeout(function() {
@@ -94,7 +97,7 @@ $(document).ready(function() {
 				,rowDelim = '"\r\n"';
 
 		var csv = '"';
-		csv += formatRows($rows.map(grabRow)) + '"';
+				csv += formatRows($rows.map(grabRow)) + '"';
 
 		var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
@@ -112,9 +115,9 @@ $(document).ready(function() {
 		}
 
 		function formatRows(rows){
-				return rows.get().join(tmpRowDelim)
-						.split(tmpRowDelim).join(rowDelim)
-						.split(tmpColDelim).join(colDelim);
+			return rows.get().join(tmpRowDelim)
+				.split(tmpRowDelim).join(rowDelim)
+				.split(tmpColDelim).join(colDelim).replace(' ', '');
 		}
 
 		function grabRow(i,row){
