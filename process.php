@@ -89,46 +89,80 @@ function get_dns_records( $type, $domains ){
         case "A":
         case "AAAA":
           foreach( $record->answer as $dnsr ) {
-            echo "<tr><td>".$dnsr->name."</td><td class=\"record\">".$dnsr->address."</td></tr>\r\n";
+            if( isset( $dnsr->address ) ) {
+              echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->address."</td></tr>\r\n";
+            } elseif( isset( $dnsr->cname ) ) {
+              echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->cname."</td></tr>\r\n";
+            } else {
+              echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+            }
           }
           default;
           break;
         // Record type is set as CNAME
         case "CNAME":
           foreach( $record->answer as $dnsr ) {
-            echo "<tr><td>".$dnsr->name."</td><td class=\"record\">".$dnsr->cname."</td></tr>\r\n";
+            if( isset( $dnsr->cname ) ) {
+              echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->cname."</td></tr>\r\n";
+            } else {
+              echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+            }
           }
           break;
         // Record type is set as MX
         case "MX":
           foreach( $record->answer as $dnsr ) {
-            echo "<tr><td>".$dnsr->name."</td><td class=\"record\">".$dnsr->preference."</td><td class=\"record\">".$dnsr->exchange."</td></tr>\r\n";
+            if( isset( $dnsr->preference ) && isset( $dnsr->exchange ) ) {
+              echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->preference."</td><td class=\"record\">".$dnsr->exchange."</td></tr>\r\n";
+            } else {
+              echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+            }
           }
           break;
         // Record type is set as NS
         case "NS":
           foreach( $record->answer as $dnsr ) {
-            echo "<tr><td>".$dnsr->name."</td><td class=\"record\">".$dnsr->nsdname."</td></tr>\r\n";
+            if( isset( $dnsr->nsdname ) ) {
+              echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->nsdname."</td></tr>\r\n";
+            } else {
+              echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+            }
           }
           break;
         // Record type is set as PTR
         case "PTR":
           foreach( $record->answer as $dnsr ){
-            echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->name."</td><td class=\"record\">".$dnsr->ptrdname."</td></tr>\r\n";
+            if( isset( $dnsr->name ) && isset( $dnsr->ptrdname ) ) {
+              echo "<tr><td>".$data."</td><td class=\"record\">".$dnsr->name."</td><td class=\"record\">".$dnsr->ptrdname."</td></tr>\r\n";
+            } else {
+              echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+            }
           }
           break;
         // Record type is set as SPF or TXT
         case "SPF":
         case "TXT":
           foreach( $record->answer as $dnsr ){
-            foreach( $dnsr->text as $dnsrtext ) {
-              echo "<tr><td>".$dnsr->name."</td><td class=\"record\">".$dnsrtext."</td></tr>\r\n";
+            if( isset( $dnsr->text ) ) {
+              foreach( $dnsr->text as $dnsrtext ) {
+                if( isset( $dnsrtext ) ) {
+                  echo "<tr><td>".$data."</td><td class=\"record\">".$dnsrtext."</td></tr>\r\n";
+                } else {
+                  echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+                }
+              }
+            } else {
+              echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
             }
           }
           break;
         // Record type is set as ReverseDNS
         case "REVERSE":
-          echo "<tr><td>".$data."</td><td class=\"record\"> ".$record."</td></tr>\r\n";
+          if( isset( $record ) ) {
+            echo "<tr><td>".$data."</td><td class=\"record\"> ".$record."</td></tr>\r\n";
+          } else {
+            echo "<tr><td>".$data."</td><td class=\"record\"><span class=\"norecord\">No record available</span></td></tr>\r\n";
+          }
           break;
       }
     }
