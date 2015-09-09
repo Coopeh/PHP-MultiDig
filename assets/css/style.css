@@ -41,20 +41,23 @@ div.header {
 	font-weight: bold;
 	margin-bottom: 20px;
 }
-div.textarea {
+div.textarea,
+div.dns-server {
 	position: relative;
 	display: block;
 	margin: 0 auto;
 	width: 70%;
-	min-height: 450px;
 	float: left;
 }
-div.textarea textarea {
+div.textarea {
+	min-height: 450px;
+}
+div.textarea textarea,
+div.dns-server input {
 	position: relative;
 	width: 100%;
 	max-width: 100%;
 	min-width: 100%;
-	min-height: 500px;
 	padding: 10px 20px;
 	outline: none;
 	border-radius: 3px;
@@ -72,6 +75,12 @@ div.textarea textarea {
 	-moz-transition: none;
 	-ms-transition: none;
 	-o-transition: none;
+}
+div.textarea textarea {
+	min-height: 500px;
+}
+div.dns-server input {
+	margin-top: 10px;
 }
 div.textarea textarea:focus {
 	border: 1px solid #fff;

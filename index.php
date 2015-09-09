@@ -38,9 +38,9 @@ ini_set("display_errors", 0);
 	</head>
 	<body>
 		<div class="github-fork-ribbon-wrapper right">
-				<div class="github-fork-ribbon">
-						<a href="https://github.com/Coopeh/PHP-MultiDig/">Fork me on GitHub</a>
-				</div>
+			<div class="github-fork-ribbon">
+					<a href="https://github.com/Coopeh/PHP-MultiDig/">Fork me on GitHub</a>
+			</div>
 		</div>
 		<div class="container">
 			<div class="header">
@@ -85,7 +85,7 @@ ini_set("display_errors", 0);
 
 							<li>
 								<input type="radio" name="radio" id="radio7" value="radio7" class="radio"/>
-								<label for="radio7">SRV Records</label>
+								<label for="radio7">SPF Records</label>
 							</li>
 
 							<li>
@@ -95,15 +95,12 @@ ini_set("display_errors", 0);
 
 							<li>
 								<input type="radio" name="radio" id="radio9" value="radio9" class="radio"/>
-								<label for="radio9">ALL Records</label>
-							</li>
-
-							<li>
-								<input type="radio" name="radio" id="radio10" value="radio10" class="radio"/>
-								<label for="radio10">Reverse DNS</label>
+								<label for="radio9">Reverse DNS</label>
 							</li>
 						</ul>
-					</li>
+					</div>
+					<div class="dns-server">
+						<input type="text" class="dns-server" name="dns-server" id="dns-server" placeholder="DNS Server: Leave blank if you wish to use Google's DNS Servers" />
 					</div>
 					<div class="submit">
 						<button class="submit" type="submit" tabindex="2">Submit</button>
